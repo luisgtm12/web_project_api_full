@@ -1,0 +1,25 @@
+.form__user-box {
+  width: 358px;
+  padding: 10px 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  outline: none;
+  background: transparent;
+}
+.form__user-box:invalid {
+  border-bottom: 1px solid red;
+}
+.form__user-box:valid {
+  border-bottom: 1px solid green;
+}
+
+@media screen and (max-width:320px) {
+  .form__user-box {
+    width: 238px;
+  }
+}

@@ -1,0 +1,10 @@
+.modal__contain-confirmation-title{
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+  margin: 30px 35px 50px 0;
+  padding-right: 100px;
+  text-align: left;
+}

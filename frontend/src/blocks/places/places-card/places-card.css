@@ -1,0 +1,9 @@
+.places-card {
+  position: relative;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  width: 282px;
+  height: 361px;
+  border-radius: 10px;
+  background-color: #fff;
+}

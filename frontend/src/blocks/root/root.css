@@ -1,0 +1,27 @@
+.page {
+  max-width: 880px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media screen and (max-width:320px) {
+  .page {
+    width: 282px;
+    margin-top: 28px;
+  } 
+}
+
+body {
+  background:#000000;
+  font-family: 'Inter';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1,h2,h3,h4,h5,h6,p,body {
+  margin: 0;
+  padding: 0;
+}

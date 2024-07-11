@@ -1,0 +1,11 @@
+.user-form__button-submit{
+  background-color: white;
+  height: 50px;
+  border: none;
+  color: black;
+}
+
+.user-form__button-submit:hover{
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+}

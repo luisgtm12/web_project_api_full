@@ -1,0 +1,17 @@
+.places-card__trash {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+}
+
+.places-card__trash:hover {
+  opacity: 0.8;
+}
+
+.places-card__trash_visible{
+  visibility: visible;
+}
+
+.places-card__trash_hidden{
+  visibility: hidden;
+}

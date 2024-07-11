@@ -1,0 +1,21 @@
+.header__subheader{
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: right;
+  color: white;
+  margin-left: 20px;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.header__subheader:hover{
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media screen and (max-width:320px) {
+	.header__subheader{
+    margin-left: 0;
+  }
+}

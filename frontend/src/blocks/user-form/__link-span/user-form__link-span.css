@@ -1,0 +1,14 @@
+.user-form__link-span{
+  height: 17px;
+  margin-top: 15px;
+  align-self: center;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.user-form__link-span:hover{
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+}

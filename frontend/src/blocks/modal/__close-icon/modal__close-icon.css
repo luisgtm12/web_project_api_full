@@ -1,0 +1,28 @@
+.modal__close-icon {
+  color: #FFFFFF;
+  top: -35px;
+  right: -30px;
+  position: absolute;
+  border: none;
+  width: 32px;
+  height: 32px;
+}
+
+.modal__close-icon:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+@media screen and (max-width:320px) {
+  .modal__close-icon{
+    top: -35px;
+    right: -2px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .info-close{
+    right: 129px;
+    top: -50px;
+  }
+}

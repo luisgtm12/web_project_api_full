@@ -1,0 +1,7 @@
+.places-card__contain {
+  width: 246px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  align-items: center;
+  justify-self: center;
+}

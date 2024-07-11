@@ -1,0 +1,25 @@
+.form__input-error {
+  margin-bottom: 0;
+  border-bottom: 1px solid #FF0000;
+  padding: 10px 0 0;
+}
+
+.form__input-error_active{
+  visibility: visible;
+  margin: 0;
+  width: 358px;
+  padding: 10px 0 0;
+  margin-bottom: 5px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+}
+
+@media screen and (max-width:320px) {
+  .form__input-error_active{
+    width: 238px;
+  }
+}

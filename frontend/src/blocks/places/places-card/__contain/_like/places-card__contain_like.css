@@ -1,0 +1,25 @@
+.places-card__contain_like {
+  position: relative;
+  display: flex;
+  margin: auto;
+  background: #FFFFFF;
+  border: none;
+}
+
+.places-card__contain_like-count{
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.places-card__contain_like:hover {
+  opacity: 0.4;
+}
+
+.places-card__contain_like_active{
+  background-image: url(/src/images/corazon-negro.png);
+}
+.black-heart {
+  background-image: url(/src/images/corazon-negro.png);
+}
