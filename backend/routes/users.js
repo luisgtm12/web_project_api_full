@@ -11,7 +11,7 @@ router.use(jwtMiddleware);
 router.get("/", userController.getAllUsers);
 router.get("/:userId", userController.getUserById);
 
-router.get("/users/me", usersController.getUserProfile);
+router.get("/users/me", userController.getUserProfile);
 
 router.patch(
   "/users/me",
