@@ -5,33 +5,33 @@ const { validateURL } = require("../middlewares/validator");
 const { jwtMiddleware } = require("../middlewares/auth");
 
 const router = express.Router();
-const userController = require("../controllers/user");
+const {getAllUsers,getUserById,getUserProfile,updateProfile,updateAvatar} = require("../controllers/user");
 router.use(jwtMiddleware);
 
-router.get("/", userController.getAllUsers);
-router.get("/:userId", userController.getUserById);
+router.get("/", getAllUsers);
+router.get("/:userId", getUserById);
 
-router.get("/users/me", userController.getUserProfile);
+router.get("/me", getUserProfile);
 
 router.patch(
-  "/users/me",
+  "/me",
   celebrate({
     body: Joi.object().keys({
       name: Joi.string().required().min(2).max(30),
       about: Joi.string().required().min(2).max(30),
     }),
   }),
-  userController.updateUserProfile
+  updateProfile
 );
 
 router.patch(
-  "/users/me/avatar",
+  "/me/avatar",
   celebrate({
     body: Joi.object().keys({
       avatar: Joi.string().required().custom(validateURL),
     }),
   }),
-  userController.updateUserAvatarProfile
+  updateAvatar
 );
 
 module.exports = router;

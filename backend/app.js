@@ -5,7 +5,7 @@ const cards = require('./routes/cards');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { login, createUser } = require('./controllers/user');
-const { requestLogger, errorLogger } = require("./middleware/logger");
+const { requestLogger, errorLogger } = require("./middlewares/logger.js");
 
 const app = express();
 const{PORT = 3000 } = process.env;
