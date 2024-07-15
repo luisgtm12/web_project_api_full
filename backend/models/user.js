@@ -1,28 +1,71 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
+const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
     minlength: 2,
-    maxlength: 30
+    maxlength: 30,
+    default: "Jacques Cousteau"
   },
   about: {
     type: String,
-    required: true,
     minlength: 2,
-    maxlength: 30
+    maxlength: 30,
+    default: "explorador",
   },
   avatar: {
     type: String,
-    required: true,
+    default:
+      "https://practicum-content.s3.us-west-1.amazonaws.com/resources/moved_avatar_1604080799.jpg",
     validate: {
-      validator: function(v) {
-        return /^(http|https):\/\/(www\.)?[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?$/.test(v);
+      validator(value) {
+        return validator.isURL(value);
       },
-      message: props => `${props.value} is not a valid avatar URL!`
-    }
-  }
-});
+    },
+  },
+  email: {
+    type: String,
+    validate: {
+      validator(value) {
+        return validator.isURL(value);
+      },
+      message: 'El enlace del avatar no cumple con los requisitos.',
+    },
+    default: 'https://practicum-content.s3.us-west-1.amazonaws.com/resources/moved_avatar_1604080799.jpg',
+  },
+  password: {
+    type: String,
+    required: true,
+    select: false,
+  },
+},{versionKey:false});
 
-module.exports = mongoose.model('user', userSchema);
+
+userSchema.statics.findUserByCredentials = function findUserByCredentials(
+  email,
+  password
+) {
+  return this.findOne({ email })
+    .select("+password")
+    .then((user) => {
+      if (!user) {
+        return Promise.reject(new Error("no existe el usuario"));
+      }
+      return bcrypt.compare(password, user.password).then((matched) => {
+        if (!matched) {
+          return Promise.reject(new Error("Incorrect  password"));
+        }
+
+        return user;
+      });
+    })
+    .catch((err) => {
+      throw new Error("correo o contraseña incorrectos");
+    });
+};
+
+const User = mongoose.model('user', userSchema);
+
+module.exports = { User };

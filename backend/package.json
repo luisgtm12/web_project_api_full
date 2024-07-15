@@ -1,5 +1,5 @@
 {
-  "name": "web_project_api_full",
+  "name": "web_project_around_express",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -27,8 +27,8 @@
     "express": "^4.18.3",
     "express-winston": "^4.2.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.0.4",
+    "mongoose": "^8.3.3",
     "validator": "^13.11.0",
-    "winston": "^3.12.0"
+    "winston": "^3.13.1"
   }
 }

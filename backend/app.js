@@ -1,13 +1,15 @@
 const express = require('express');
-
+const { errors } = require('celebrate');
 const users = require('./routes/users');
 const cards = require('./routes/cards');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const { login, createUser } = require('./controllers/user');
+const { requestLogger, errorLogger } = require("./middleware/logger");
 
 const app = express();
 const{PORT = 3000 } = process.env;
-mongoose.connect('mongodb://localhost:27017/aroundb');
+mongoose.connect('mongodb://127.0.0.1:27017/aroundb');
 
 const db = mongoose.connection;
 
@@ -16,16 +18,18 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
+app.use(requestLogger);
 app.use(bodyParser.json());
 app.use('/users' ,users);
 app.use('/cards' ,cards);
 
-app.use((req, res, next) => {
-  req.user = {
-    _id: '5d8b8592978f8bd833ca8133' // ID del usuario de prueba
-  };
-  next();
-});
+app.post('/signin', login);
+app.post('/signup', createUser);
+
+app.use(errorLogger);
+// Middleware de manejo de errores de celebrate
+app.use(errors());
+
 
 // Ruta por defecto: devuelve un mensaje de error para cualquier otra ruta
 app.use((req, res) => {

@@ -24,6 +24,8 @@ function App() {
   const [cards, setCards] = useState([]);
   const [isLogged, setIsLogged] = useState(false);
   const [emailUser, setEmailUser] = useState("");
+  const [token, setToken] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,9 +42,11 @@ function App() {
 
 
   useEffect(()=>{
-    if(localStorage.getItem('jwt')){
+    const storedToken = localStorage.getItem('jwt');
+    if(storedToken){
+      setToken(storedToken)
       auth 
-        .getToken(localStorage.getItem('jwt'))
+        .getToken(storedToken)
         .then((data)=>{
             if(data){
               setIsLogged(true);
@@ -58,7 +62,7 @@ function App() {
           navigate('/signup')
         })
     }
-  },[isLogged, navigate]);
+  },[isLogged, navigate,token]);
 
   function signOff(){
     localStorage.removeItem('jwt')
