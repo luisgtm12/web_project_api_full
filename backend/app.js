@@ -17,6 +17,11 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
   console.log('Connected to MongoDB');
 });
+var cors = require('cors');
+
+// inclúyelos antes de otras rutas
+app.use(cors());
+app.options('*', cors());
 
 app.use(requestLogger);
 app.use(bodyParser.json());
