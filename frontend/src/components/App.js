@@ -101,13 +101,13 @@ function App() {
     if (isLiked) {
       api.deleteLike(card._id).then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c._id === c._id ? newCard : c))
+          state.map((c) => (c._id === card._id ? newCard.data : c))
         );
       });
     } else {
       api.addLike(card._id).then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
+          state.map((c) => (c._id === card._id ? newCard.data : c))
         );
       });
     }
