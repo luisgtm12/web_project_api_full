@@ -35,7 +35,7 @@ app.use(cors(corsOptions));
 app.use(requestLogger);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.get('/',(req,res)=>{res.send('soy un string')})
 app.post('/signin', login);
 app.post('/signup', createUser);
 //app.use(jwtMiddleware)
