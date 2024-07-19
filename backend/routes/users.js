@@ -1,20 +1,34 @@
 const express = require("express");
-
+const path = require('path');
+const fs = require('fs');
 const { celebrate, Joi } = require("celebrate");
 const { validateURL } = require("../middlewares/validator");
 const { jwtMiddleware } = require("../middlewares/auth");
 
 const router = express.Router();
-const {getAllUsers,getUserById,getUserProfile,updateProfile,updateAvatar} = require("../controllers/user");
-router.use(jwtMiddleware);
+const {
+  getAllUsers,
+  getUserById,
+  getUserProfile,
+  updateProfile,
+  updateAvatar,createUser
+} = require("../controllers/user");
 
-router.get("/", getAllUsers);
-router.get("/:userId", getUserById);
-
-router.get("/me", getUserProfile);
-
+router.get("/", jwtMiddleware, getAllUsers);
+router.get("/users/me", jwtMiddleware, getUserProfile);
+router.get("/:Id", jwtMiddleware, getUserById);
+router.post('/signup', celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().required(),
+    about: Joi.string().required(),
+    avatar: Joi.string().uri().required(),
+    email: Joi.string().required().email(),
+    password: Joi.string().required().min(8),
+  }),
+}), createUser);
 router.patch(
   "/me",
+  jwtMiddleware,
   celebrate({
     body: Joi.object().keys({
       name: Joi.string().required().min(2).max(30),
@@ -26,6 +40,7 @@ router.patch(
 
 router.patch(
   "/me/avatar",
+  jwtMiddleware,
   celebrate({
     body: Joi.object().keys({
       avatar: Joi.string().required().custom(validateURL),

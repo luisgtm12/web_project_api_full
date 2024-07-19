@@ -6,9 +6,11 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { login, createUser } = require('./controllers/user');
 const { requestLogger, errorLogger } = require("./middlewares/logger.js");
+const {jwtMiddleware} = require('./middlewares/auth.js')
+const {celebrate,Joi} = require('celebrate');
 
 const app = express();
-const{PORT = 3000 } = process.env;
+const{PORT = 8001 } = process.env;
 mongoose.connect('mongodb://127.0.0.1:27017/aroundb');
 
 const db = mongoose.connection;
@@ -20,11 +22,24 @@ db.once('open', () => {
 var cors = require('cors');
 
 // inclúyelos antes de otras rutas
-app.use(cors());
-app.options('*', cors());
+const corsOptions = {
+  origin: '*', // Allow all origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+  credentials: true // Allow credentials if needed
+};
+
+app.use(cors(corsOptions));
 
 app.use(requestLogger);
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.post('/signin', login);
+app.post('/signup', createUser);
+app.use(jwtMiddleware)
+
+
 app.use('/users' ,users);
 app.use('/cards' ,cards);
 
@@ -34,8 +49,13 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.post('/signin', login);
-app.post('/signup', createUser);
+/*app.post('/signin', login);
+app.post('/signup',celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required().min(8),
+  }),
+}), createUser);*/
 
 app.use(errorLogger);
 // Middleware de manejo de errores de celebrate
