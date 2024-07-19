@@ -60,6 +60,7 @@ export const getToken = (token) => {
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log("auth Token", data)
       return data;
     })
     .catch((err) => {

@@ -14,7 +14,7 @@ const {
   updateAvatar,createUser
 } = require("../controllers/user");
 
-router.get("/", jwtMiddleware, getAllUsers);
+router.get("/me", jwtMiddleware, getAllUsers);
 router.get("/me", jwtMiddleware, getUserProfile);
 router.get("/:Id", jwtMiddleware, getUserById);
 router.post('/signup', celebrate({
