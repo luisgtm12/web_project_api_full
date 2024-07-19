@@ -96,12 +96,12 @@ function App() {
 
   function handleCardLike(card) {
     // Verifica una vez más si a esta tarjeta ya le han dado like
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     if (isLiked) {
       api.deleteLike(card._id).then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
+          state.map((c) => (c._id === c._id ? newCard : c))
         );
       });
     } else {
@@ -128,7 +128,7 @@ function App() {
 
   function handleUpdateAvatar(data) {
     api.updateAvatar(data).then((userData) => {
-      setCurrentUser(userData);
+      setCurrentUser(userData.data);
       setIsEditAvatarPopupOpen(false);
     });
   }
