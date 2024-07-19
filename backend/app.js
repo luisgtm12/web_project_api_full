@@ -11,7 +11,7 @@ const {celebrate,Joi} = require('celebrate');
 require("dotenv").config();
 
 const app = express();
-const{PORT = 8001 } = process.env;
+const{PORT = 3000 } = process.env;
 mongoose.connect('mongodb://127.0.0.1:27017/aroundb');
 
 const db = mongoose.connection;
