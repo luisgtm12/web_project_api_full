@@ -42,12 +42,15 @@ function Login({isUserLogged}) {
   //Manipulacion del submit del Formulario
   function handleSubmit(event){
     event.preventDefault()
+    console.log('submit login front', userCredentials)
     if(!userCredentials.email || !userCredentials.password){
       return 
     }
+    console.log('submit oo',userCredentials)
       auth
         .authorize(userCredentials.email, userCredentials.password)
         .then((data)=>{
+          console.log('datos recibidos from authorize', userCredentials,data);
           if(data.token){
             setUserCredentials({
               email: '',

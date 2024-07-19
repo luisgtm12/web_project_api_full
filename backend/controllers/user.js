@@ -21,7 +21,7 @@ module.exports.login = (req, res, next) => {
     })
     .catch((err) => {
      // console.log(err)
-      res.status(401).send({ message: 'CC Correo o contraseña incorrectos' });
+      res.status(401).send({ message: 'Correo o contraseña incorrectos' });
     });
 };
 

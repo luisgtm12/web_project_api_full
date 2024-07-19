@@ -15,7 +15,7 @@ const {
 } = require("../controllers/user");
 
 router.get("/", jwtMiddleware, getAllUsers);
-router.get("/users/me", jwtMiddleware, getUserProfile);
+router.get("/me", jwtMiddleware, getUserProfile);
 router.get("/:Id", jwtMiddleware, getUserById);
 router.post('/signup', celebrate({
   body: Joi.object().keys({

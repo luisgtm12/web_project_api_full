@@ -1,9 +1,11 @@
-const base_url = 'https://tripleten.desarrollointerno.com';
-
+const base_url = 'http://localhost:8001';
+//const base_url ="https://api.web-around.mooo.com";
 export const register = (email, password) => {
+  console.log('register auth:', { email, password });
   return fetch(`${base_url}/signup`, {
     method: 'POST',
     headers: {
+      Accept: 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
@@ -25,8 +27,8 @@ export const register = (email, password) => {
 export const authorize = (email, password) => {
   return fetch(`${base_url}/signin`, {
     method: 'POST',
-
     headers: {
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
 
@@ -35,8 +37,8 @@ export const authorize = (email, password) => {
     .then((res) => res.json())
     .then((data) => {
       if (data.token) {
-        localStorage.setItem('jwt', data.token);
-
+        localStorage.setItem('token', data.token);
+        console.log('token autorize', data.token)
         return data;
       } else {
         return;

@@ -30,6 +30,7 @@ function Register() {
   }
   // Manipulacion del Submit del formulario
   function handleSubmit(event) {
+    console.log('handlesubmit',userCredentials)
     event.preventDefault();
     auth
       .register(userCredentials.email, userCredentials.password)

@@ -13,9 +13,9 @@ function EditProfilePopup({isOpen,onClose,onUpdateUser}) {
 
   useEffect(() => {
     // Reviso que el usuario en el contexto no sea `undefined`
-    if (currentUser) {
-      setName(currentUser.name);
-      setDescription(currentUser.about);
+    if (currentUser.name !== undefined || currentUser.about !== undefined) {
+      setName(currentUser.name || '');
+      setDescription(currentUser.about || '');
     }
   }, [currentUser]);
 

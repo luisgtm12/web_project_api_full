@@ -8,6 +8,7 @@ const { login, createUser } = require('./controllers/user');
 const { requestLogger, errorLogger } = require("./middlewares/logger.js");
 const {jwtMiddleware} = require('./middlewares/auth.js')
 const {celebrate,Joi} = require('celebrate');
+require("dotenv").config();
 
 const app = express();
 const{PORT = 8001 } = process.env;
@@ -24,7 +25,7 @@ var cors = require('cors');
 // inclúyelos antes de otras rutas
 const corsOptions = {
   origin: '*', // Allow all origins
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
+  methods: ['GET', 'POST','PATCH', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
   credentials: true // Allow credentials if needed
 };
@@ -49,13 +50,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-/*app.post('/signin', login);
-app.post('/signup',celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
-  }),
-}), createUser);*/
+
 
 app.use(errorLogger);
 // Middleware de manejo de errores de celebrate

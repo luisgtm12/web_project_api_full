@@ -24,49 +24,46 @@ function App() {
   const [cards, setCards] = useState([]);
   const [isLogged, setIsLogged] = useState(false);
   const [emailUser, setEmailUser] = useState("");
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token'))
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.getCards().then((cards) => {
-      setCards(cards);
-    });
-  }, []);
+    if (isLogged) {
+      api.defaultProfile(token).then((data) => {
+        setCurrentUser(data.data);
+      }).catch(err => console.log(err));
 
-  useEffect(() => {
-    api.defaultProfile().then((res) => {
-      setCurrentUser(res);
-    });
-  }, []);
+      api.getCards(token).then((data) => {
+        setCards(data.data);
+      }).catch(err => console.log(err));
+    }
+  }, [isLogged, token]);
 
 
   useEffect(()=>{
-    const storedToken = localStorage.getItem('jwt');
-    if(storedToken){
-      setToken(storedToken)
-      auth 
-        .getToken(storedToken)
-        .then((data)=>{
-            if(data){
-              setIsLogged(true);
-              setEmailUser(data.email);
-              navigate('/')
-            } else{
-              navigate('/signup')
-              throw new Error('Token invalido')
-            }
+    const token = localStorage.getItem('token');
+    console.log('token app front',token)
+    if (token) {
+      auth.getToken(token)
+        .then((res) => {
+          if (res) {
+            setEmailUser(res.data.email);
+            setToken(token);
+            setIsLogged(true);
+            navigate("/", { replace: true });
+          }
         })
-        .catch((error)=>{
-          console.log(error);
-          navigate('/signup')
-        })
+        .catch(err => console.log(err));
     }
-  },[isLogged, navigate,token]);
+  },[]);
 
   function signOff(){
-    localStorage.removeItem('jwt')
-    setEmailUser("")    
+    localStorage.removeItem('token');
+    setEmailUser("");
+    setIsLogged(false);
+    setToken(null);
+    navigate('/signin');
   }
 
   function handleLogin(){
@@ -117,14 +114,14 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id).then((res) => {
+    api.deleteCard(card._id).then(() => {
       setCards((state) => state.filter((c) => c._id !== card._id));
     });
   }
 
   function handleUpdateUser(data) {
-    api.updateProfile(data).then(() => {
-      setCurrentUser({ ...currentUser, ...data });
+    api.updateProfile(data).then((res) => {
+      setCurrentUser(res.data);
       setIsEditProfilePopupOpen(false);
     });
   }
@@ -136,9 +133,9 @@ function App() {
     });
   }
 
-  function handleAddPlaceSubmit(card) {
-    api.addCards(card).then((newCard) => {
-      setCards([newCard, ...cards]);
+  function handleAddPlaceSubmit(data) {
+    api.addCards(data).then((newCard) => {
+      setCards([newCard.data, ...cards]);
       setIsAddPlacePopupOpen(false);
     });
   }

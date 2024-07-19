@@ -21,7 +21,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     e.preventDefault();
     const avatar = avatarRef.current.value;
     if (isUrlValid(avatar)) {
-      onUpdateAvatar({ avatar });
+      onUpdateAvatar({ avatar:avatar });
     }
   }
 

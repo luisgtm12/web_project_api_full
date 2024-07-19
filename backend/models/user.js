@@ -62,7 +62,7 @@ userSchema.statics.findUserByCredentials = function (
       })
     })
     .catch((err) => {
-      throw new Error("Holacorreo o contraseña incorrectos");
+      throw new Error("correo o contraseña incorrectos");
     });
 };
 
