@@ -21,10 +21,18 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 var cors = require('cors');
-
+const allowedOrigins = ['http://localhost:3000', 'http://api.web-around.mooo.com'];
 // inclúyelos antes de otras rutas
 const corsOptions = {
-  origin: '*', // Allow all origins
+  origin: function (origin, callback) {
+    // Permite solicitudes con origen undefined (p. ej., aplicaciones móviles)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'El CORS policy para este sitio no permite acceso desde el origen especificado.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   methods: ['GET', 'POST','PATCH', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
   credentials: true // Allow credentials if needed

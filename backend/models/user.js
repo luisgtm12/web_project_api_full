@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
-    default: "Jacques Cousteau"
+    default: "Jacques Cousteau",
+    required: true,
   },
   about: {
     type: String,
@@ -34,6 +35,7 @@ const userSchema = new mongoose.Schema({
       message: 'El enlace del avatar no cumple con los requisitos.',
     },
     default: 'https://practicum-content.s3.us-west-1.amazonaws.com/resources/moved_avatar_1604080799.jpg',
+    required: true,
   },
   password: {
     type: String,

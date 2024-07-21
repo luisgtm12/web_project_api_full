@@ -49,14 +49,14 @@ module.exports.getUserById = async (req, res) => {
 
 
 module.exports.createUser = (req, res) => {
-  const { name, about, avatar, email } = req.body;
+  const { name, about, avatar, email,password } = req.body;
   console.log('Datos recibidos en createUser:', req.body);
   User.findOne({ email })
     .then((user) => {
       if (user) {
         throw new Error(" El email ya se encuentra registrado");
       } else {
-        return bcrypt.hash(req.body.password, 10);
+        return bcrypt.hash(password, 10);
       }
     })
 

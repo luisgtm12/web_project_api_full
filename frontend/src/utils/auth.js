@@ -1,5 +1,5 @@
 //const base_url = 'http://localhost:8001';
-const base_url ="https://api.web-around.mooo.com";
+const base_url ="http://api.web-around.mooo.com";
 export const register = (email, password) => {
   console.log('register auth:', { email, password });
   return fetch(`${base_url}/signup`, {
