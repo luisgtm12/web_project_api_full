@@ -1,26 +1,29 @@
 # Tripleten web_project_api_full
 
-# Proyecto de Autenticación y Manejo de Tarjetas con React, Node.js y MongoDB
+## Proyecto de Autenticación y Manejo de Tarjetas con React, Node.js y MongoDB
 
-Este proyecto es una aplicación web que permite a los usuarios registrarse, iniciar sesión, y manejar tarjetas (likes y creación de nuevas tarjetas). Utiliza tecnologías modernas como React para el frontend, Node.js y Express para el backend, y MongoDB como base de datos.
+Este proyecto es una aplicación web que permite a los usuarios registrarse, iniciar sesión y manejar tarjetas (likes y creación de nuevas tarjetas). Utiliza tecnologías modernas como React para el frontend, Node.js y Express para el backend, y MongoDB como base de datos.
 
 ## Tecnologías Utilizadas
 
-1. **Frontend:**
-   - **React:** Biblioteca de JavaScript para construir interfaces de usuario.
-   - **React Router:** Librería para manejar la navegación en la aplicación de una sola página.
-   - **Context API:** Para manejar el estado global de la aplicación.
-   - **Fetch API:** Para realizar solicitudes HTTP desde el frontend al backend.
-   
-2. **Backend:**
-   - **Node.js:** Entorno de ejecución de JavaScript del lado del servidor.
-   - **Express:** Framework para aplicaciones web en Node.js.
-   - **Mongoose:** ODM (Object Data Modeling) para MongoDB y Node.js.
-   - **bcryptjs:** Para el hash de contraseñas.
-   - **jsonwebtoken:** Para la generación y verificación de tokens JWT.
-   
-3. **Base de Datos:**
-   - **MongoDB:** Base de datos NoSQL orientada a documentos.
+### Frontend
+
+- **React:** Biblioteca de JavaScript para construir interfaces de usuario.
+- **React Router:** Librería para manejar la navegación en la aplicación de una sola página.
+- **Context API:** Para manejar el estado global de la aplicación.
+- **Fetch API:** Para realizar solicitudes HTTP desde el frontend al backend.
+
+### Backend
+
+- **Node.js:** Entorno de ejecución de JavaScript del lado del servidor.
+- **Express:** Framework para aplicaciones web en Node.js.
+- **Mongoose:** ODM (Object Data Modeling) para MongoDB y Node.js.
+- **bcryptjs:** Para el hash de contraseñas.
+- **jsonwebtoken:** Para la generación y verificación de tokens JWT.
+
+### Base de Datos
+
+- **MongoDB:** Base de datos NoSQL orientada a documentos.
 
 ## Estructura del Proyecto
 
@@ -58,11 +61,32 @@ Este proyecto es una aplicación web que permite a los usuarios registrarse, ini
 4. **Middleware:**
    - **authMiddleware.js:** Middleware para proteger rutas que requieren autenticación.
 
-## Ejecución del Proyecto
+## Instalación y Ejecución del Proyecto
 
-### Instalación
+# Instalación de Dependencias
 
-1. **Clonar el repositorio:**
+A continuación se detallan los pasos para instalar las dependencias necesarias para el proyecto, tanto para el frontend como para el backend.
+
+## Instalación del Backend
+
+1. **Navega al directorio del backend:**
+
+   Abre una terminal y cambia al directorio del backend donde está ubicado el archivo `package.json` para el servidor.
+
    ```bash
-   git clone https://github.com/luisgtm12/web_project_api_full.git
-   cd tu-repositorio
+   cd backend
+   npm install
+   npm run dev
+
+1. **Navega al directorio del frontend:**
+
+   Abre una terminal y cambia al directorio del frontend donde está ubicado el archivo `package.json`.
+   cd frontend
+   npm install
+   npm run start
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/luisgtm12/web_project_api_full.git
+cd web_project_api_full
